@@ -9,6 +9,10 @@ require 'redis_web_manager/data'
 require 'active_support/time'
 require 'redis'
 
+require 'pagy'
+require 'pagy/extras/array'
+require 'pagy/extras/bootstrap'
+
 module RedisWebManager
   mattr_accessor :redises, default: { default: Redis.new }
   mattr_accessor :lifespan, default: 15.days
