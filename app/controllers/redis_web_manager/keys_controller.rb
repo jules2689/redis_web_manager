@@ -127,7 +127,7 @@ module RedisWebManager
       keys = info.search(params[:query].presence).map { |key| format_key(key) }
       keys = filter_by_type(keys, params[:type].presence)
       keys = filter_by_expiry(keys, params[:expiry].presence)
-      filter_by_memory(keys, params[:expiry].presence)
+      filter_by_memory(keys, params[:memory].presence)
     end
 
     def filter_by_type(keys, type)
@@ -144,7 +144,13 @@ module RedisWebManager
 
     def filter_by_memory(keys, memory)
       return keys if invalid_option(memory)
-      keys.select { |key| key[:memory] < memory.to_i }
+      keys.select do |key|
+        if memory.to_i.negative?
+          key[:memory] > (memory.to_i * -1)
+        else
+          key[:memory] < memory.to_i
+        end
+      end
     end
 
     def invalid_option(option)

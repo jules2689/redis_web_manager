@@ -27,7 +27,12 @@ module RedisWebManager
        ['Less than 100 KB', 100_000],
        ['Less than 1 MB', 1_000_000],
        ['Less than 10 MB', 10_000_000],
-       ['Less than 100 MB', 100_000_000]]
+       ['Less than 100 MB', 100_000_000],
+       ['More than 10 KB', -10_000],
+       ['More than 100 KB', -100_000],
+       ['More than 1 MB', -1_000_000],
+       ['More than 10 MB', -10_000_000],
+       ['More than 100 MB', -100_000_000]]
     end
   end
 end
